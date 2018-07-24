@@ -1,0 +1,8 @@
+body {
+    background: #DDDDDD;
+    color: blue;
+}
+
+p.warn {
+    color: red;
+}

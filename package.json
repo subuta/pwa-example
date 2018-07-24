@@ -1,0 +1,48 @@
+{
+  "name": "pwa-example",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "taskr build",
+    "dev": "taskr",
+    "serve": "node -r esm ./server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/subuta/pwa-example.git"
+  },
+  "esm": {
+    "mode": "all",
+    "await": true
+  },
+  "author": "subuta <shunta.3110@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/subuta/pwa-example/issues"
+  },
+  "taskr": {
+    "register": [
+      "@taskr/esnext"
+    ]
+  },
+  "homepage": "https://github.com/subuta/pwa-example#readme",
+  "dependencies": {
+    "@koa/cors": "^2.2.2",
+    "browser-sync": "^2.24.6",
+    "clear-module": "^3.0.0",
+    "esm": "3.0.8",
+    "koa": "^2.5.2",
+    "koa-logger": "^3.2.0",
+    "koa-router": "^7.4.0",
+    "koa-static": "^5.0.0",
+    "sane": "^2.5.2"
+  },
+  "devDependencies": {
+    "@taskr/clear": "^1.1.0",
+    "@taskr/esnext": "^1.1.0",
+    "@taskr/watch": "^1.1.0",
+    "taskr": "^1.1.0",
+    "workbox-build": "^3.4.1"
+  }
+}
