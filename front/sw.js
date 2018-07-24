@@ -15,17 +15,17 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-importScripts('https://storage.googleapis.com/workbox-cdn/releases/3.0.0/workbox-sw.js');
+importScripts('https://storage.googleapis.com/workbox-cdn/releases/3.0.0/workbox-sw.js')
 
 if (workbox) {
-  console.log(`Yay! Workbox is loaded 🎉`);
+  console.log(`Yay! Workbox is loaded 🎉`)
 
-  workbox.precaching.precacheAndRoute([]);
+  workbox.precaching.precacheAndRoute([])
 
   workbox.routing.registerRoute(
     'https://cdn.polyfill.io/v2/polyfill.min.js',
     workbox.strategies.networkFirst()
-  );
+  )
 
   // workbox.routing.registerRoute(
   //   /(.*)articles(.*)\.(?:png|gif|jpg)/,
@@ -40,26 +40,33 @@ if (workbox) {
   //   })
   // );
 
-  const articleHandler = workbox.strategies.networkFirst({
-    cacheName: 'articles-cache',
+  const endpoint = 'http://localhost:3000/api/*'
+
+  const apiHandler = workbox.strategies.networkFirst({
+    cacheName: 'api-cache',
     plugins: [
       new workbox.expiration.Plugin({
         maxEntries: 50,
       })
     ]
-  });
+  })
 
-  workbox.routing.registerRoute(/(.*)article(.*)\.html/, args => {
-    return articleHandler.handle(args).then(response => {
-      if (!response) {
-        return caches.match('pages/offline.html');
-      } else if (response.status === 404) {
-        return caches.match('pages/404.html');
-      }
-      return response;
-    });
-  });
+  workbox.routing.registerRoute(
+    /http:\/\/localhost:3000\/api\/(.*)/,
+    args => {
+      return apiHandler.handle(args).then(async response => {
+        if (!response) {
+          // FIXME: Error response goes to `then` statement of fetch...
+          // SEE: https://github.com/GoogleChrome/workbox/issues/1551
+          return new Response('Looks like offline ;)', { status: 500, statusText: 'offline' });
+        } else if (response.status === 404) {
+          return new Response('Looks like offline or Page not found', { status: 404, statusText: 'notFound' });
+        }
+        return response;
+      });
+    }
+  )
 
 } else {
-  console.log(`Boo! Workbox didn't load 😬`);
+  console.log(`Boo! Workbox didn't load 😬`)
 }

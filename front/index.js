@@ -7,7 +7,10 @@ const render = (html) => {
 }
 
 fetch(endpoint)
-  .then((res) => res.text())
+  .then((res) => {
+    if (res.status !== 200) throw new Error('Cache miss.')
+    return res.text()
+  })
   .then((text) => {
     render(`
         <p>
@@ -15,9 +18,10 @@ fetch(endpoint)
         </p>
     `)
   }).catch((err) => {
+    console.log('err = ', err)
     render(`
-        <p class="warn">
-            Got error response from API. response = <b>${err.message}</b> 
-        </p>
-    `)
-})
+            <p class="warn">
+                Got error response from API. response = <b>${err.message}</b> 
+            </p>
+        `)
+  })

@@ -49,6 +49,7 @@ export async function serve (task) {
   isServer = true
   bs({
     server: dist,
+    port: 4000,
     startPath: '/'
   })
 }
