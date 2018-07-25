@@ -1,0 +1,66 @@
+<!--
+// Borrowed from https://github.com/GoogleChrome/workbox
+
+Copyright 2018 Google Inc.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <!-- Set the viewport -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+    <!-- Set character encoding -->
+    <meta charset="utf-8">
+
+    <!-- Set title -->
+    <title>PWA Example</title>
+
+    <!-- Request styles -->
+    <link rel="stylesheet" href="/style/main.css"/>
+    <script src="/index.js"></script>
+
+    <script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
+</head>
+
+<body>
+
+<header>
+    <a href="/pages/hoge">hoge</a>
+    <a href="/pages/fuga">fuga</a>
+    <a href="/pages/piyo">piyo</a>
+    <a href="/pages/not-exists">not exists</a>
+</header>
+
+<section id="page">
+    <h1>Your networks looks offline currently ;)</h1>
+</section>
+
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/sw.js')
+        .then(registration => {
+          console.log(`Service Worker registered! Scope: ${registration.scope}`)
+        })
+        .catch(err => {
+          console.log(`Service Worker registration failed: ${err}`)
+        })
+    })
+  }
+</script>
+
+</body>
+</html>

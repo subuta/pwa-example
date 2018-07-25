@@ -30,14 +30,23 @@ limitations under the License.
 
     <!-- Request styles -->
     <link rel="stylesheet" href="/style/main.css"/>
-    <script src="index.js"></script>
+    <script src="/index.js"></script>
 
     <script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
 </head>
 
 <body>
 
-<div id="app">Loading...</div>
+<header>
+    <a href="/pages/hoge">hoge</a>
+    <a href="/pages/fuga">fuga</a>
+    <a href="/pages/piyo">piyo</a>
+    <a href="/pages/not-exists">not exists</a>
+</header>
+
+<section id="page">
+    <h1>404 Not found</h1>
+</section>
 
 <script>
   if ('serviceWorker' in navigator) {

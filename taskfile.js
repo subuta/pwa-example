@@ -9,7 +9,7 @@ let isWatch = 0
 let isServer = 0
 
 const src = {
-  api: 'api/**/*',
+  pages: 'pages/**/*',
   copy: [
     'front/**/*'
   ]
@@ -48,15 +48,14 @@ export async function build (task) {
 export async function serve (task) {
   isServer = true
   bs({
-    server: dist,
     port: 4000,
-    startPath: '/'
+    proxy: 'localhost:3000'
   })
 }
 
 export default async function (task) {
   isWatch = true
   await task.start('build')
-  await task.watch([src.copy, src.api], 'build')
+  await task.watch([src.copy, src.pages], 'build')
   await task.start('serve')
 }

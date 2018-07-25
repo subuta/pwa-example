@@ -32,10 +32,12 @@
     "browser-sync": "^2.24.6",
     "clear-module": "^3.0.0",
     "esm": "3.0.8",
+    "handlebars": "^4.0.11",
     "koa": "^2.5.2",
     "koa-logger": "^3.2.0",
     "koa-router": "^7.4.0",
     "koa-static": "^5.0.0",
+    "koa-views": "^6.1.4",
     "sane": "^2.5.2"
   },
   "devDependencies": {

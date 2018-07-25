@@ -1,6 +1,12 @@
 body {
     background: #DDDDDD;
-    color: blue;
+    color: #242424;
+}
+
+header a {
+    display: inline-block;
+    margin: 0 8px 0 0;
+    text-transform: capitalize;
 }
 
 p.warn {
